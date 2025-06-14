@@ -21,21 +21,12 @@ import { Alert, AlertTitle } from "@/components/ui/alert";
 import { Loader, OctagonAlertIcon } from "lucide-react";
 import Link from "next/link";
 
-const formSchema = z
-  .object({
-    email: z.string().email({ message: "Email is required" }),
-    name: z.string().min(1, { message: "please enter your name" }),
-    password: z.string().min(6, { message: "Please enter a password" }),
-    confirmPassword: z
-      .string()
-      .min(6, { message: "Please confirm your password" }),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords don't match",
-    path: ["confirmPassword"],
-  });
+const formSchema = z.object({
+  email: z.string().email({ message: "Email is required" }),
+  password: z.string().min(6, { message: "Please enter a password" }),
+});
 
-export function RegisterForm({
+export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"form">) {
@@ -48,18 +39,15 @@ export function RegisterForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
-      name: "",
       password: "",
-      confirmPassword: "",
     },
   });
 
   const onSubmit = (data: z.infer<typeof formSchema>) => {
     setError(null);
     setIsPending(true);
-    authClient.signUp.email(
+    authClient.signIn.email(
       {
-        name: data.name,
         email: data.email,
         password: data.password,
       },
@@ -81,38 +69,18 @@ export function RegisterForm({
       <form
         onSubmit={form.handleSubmit(onSubmit)}
         className={cn(
-          "flex flex-col tracking-tighter gap-6 mt-3 w-full max-w-md ",
+          "flex flex-col tracking-tighter gap-6 mt-15 w-full max-w-md ",
           className
         )}
         {...props}
       >
         <div className="flex flex-col items-center gap-2 text-center">
-          <h1 className="text-2xl font-bold">Create account</h1>
+          <h1 className="text-2xl font-bold">Login to your account</h1>
           <p className="text-muted-foreground text-sm text-balance">
-            Enter your details below to create account
+            Enter your email below to login to your account
           </p>
         </div>
         <div className="grid gap-6">
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Name</FormLabel>
-                <FormControl>
-                  <Input
-                    disabled={isPending}
-                    id="Name"
-                    className="h-10"
-                    placeholder="Full name"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
           <FormField
             control={form.control}
             name="email"
@@ -140,27 +108,12 @@ export function RegisterForm({
               <FormItem>
                 <div className="flex items-center">
                   <FormLabel>Password</FormLabel>
-                </div>
-                <FormControl>
-                  <Input
-                    disabled={isPending}
-                    className="h-10"
-                    id="password"
-                    type="password"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="confirmPassword"
-            render={({ field }) => (
-              <FormItem>
-                <div className="flex items-center">
-                  <FormLabel>Confirm password</FormLabel>
+                  <a
+                    href="#"
+                    className="ml-auto text-sm underline-offset-4 hover:underline"
+                  >
+                    Forgot your password?
+                  </a>
                 </div>
                 <FormControl>
                   <Input
@@ -187,10 +140,10 @@ export function RegisterForm({
             {isPending ? (
               <div className="flex items-center justify-center gap-2">
                 <Loader className="w-4 h-4 animate-spin" />
-                <span>Creating account...</span>
+                <span>Logging in...</span>
               </div>
             ) : (
-              "Register"
+              "Login"
             )}
           </Button>
           <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
@@ -205,13 +158,13 @@ export function RegisterForm({
                 fill="currentColor"
               />
             </svg>
-            Register with GitHub
+            Login with GitHub
           </Button>
         </div>
         <div className="text-center text-sm">
-          You have an account?{" "}
-          <Link href="/login" className="underline underline-offset-4">
-            Sign in
+          Don&apos;t have an account?{" "}
+          <Link href="/register" className="underline underline-offset-4">
+            Sign up
           </Link>
         </div>
       </form>

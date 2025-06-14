@@ -1,5 +1,5 @@
-import { LoginCard } from "@/modules/auth/ui/login-card";
+import { LoginForm } from "@/modules/auth/ui/login-form";
 
 export default function LoginPage() {
-  return <LoginCard />;
+  return <LoginForm />;
 }
