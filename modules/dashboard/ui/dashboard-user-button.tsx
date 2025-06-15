@@ -13,17 +13,20 @@ import { AvatarImage } from "@radix-ui/react-avatar";
 import { GeneratedAvatar } from "@/components/generated-avatat";
 import { ChevronDownIcon, CreditCard, LogOut } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { Drawer, DrawerContent, DrawerFooter, DrawerHeader, DrawerTrigger } from "@/components/ui/drawer";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
 
 export const DashboardUserButton = () => {
   const { data, isPending } = authClient.useSession();
-  
-  
+
   const router = useRouter();
   const isMobile = useIsMobile();
-
-
 
   const onLogout = () => {
     authClient.signOut({
@@ -39,30 +42,30 @@ export const DashboardUserButton = () => {
     return null;
   }
 
-  if(isMobile){
+  if (isMobile) {
     return (
       <Drawer>
         <DrawerTrigger className="rounded-lg cursor-pointer border border-border/90 p-3 overflow-hidden flex items-center justify-between hover:bg-muted">
           {data.user.image ? (
-          <Avatar>
-            <AvatarImage src={data.user.image} />
-          </Avatar>
-        ) : (
-          <GeneratedAvatar
-            seed={data.user.name}
-            variant="initials"
-            className="size-9 mr-3"
-          />
-        )}
-        <div className="flex flex-col  text-left overflow-hidden flex-1 min-w-0">
-          <p className="text-[13px] tracking-tight truncate font-medium">
-            {data.user.name}
-          </p>
-          <p className="text-[13px] tracking-tight truncate font-medium">
-            {data.user.email}
-          </p>
-        </div>
-        <ChevronDownIcon className="size-4 shrink-0" />
+            <Avatar>
+              <AvatarImage src={data.user.image} />
+            </Avatar>
+          ) : (
+            <GeneratedAvatar
+              seed={data.user.name}
+              variant="initials"
+              className="size-9 mr-3"
+            />
+          )}
+          <div className="flex flex-col  text-left overflow-hidden flex-1 min-w-0">
+            <p className="text-[13px] tracking-tight truncate font-medium">
+              {data.user.name}
+            </p>
+            <p className="text-[13px] tracking-tight truncate font-medium">
+              {data.user.email}
+            </p>
+          </div>
+          <ChevronDownIcon className="size-4 shrink-0" />
         </DrawerTrigger>
         <DrawerContent>
           <DrawerHeader className="flex flex-col items-start">
@@ -74,18 +77,25 @@ export const DashboardUserButton = () => {
             </span>
           </DrawerHeader>
           <DrawerFooter>
-            <Button variant="outline" className="flex cursor-pointer items-center justify-between">
-          Billing
-          <CreditCard />
-          </Button>
-          <Button onClick={onLogout} variant="outline" className="flex cursor-pointer items-center justify-between">
-          Logout
-          <LogOut />
-          </Button>
+            <Button
+              variant="outline"
+              className="flex cursor-pointer items-center justify-between"
+            >
+              Billing
+              <CreditCard />
+            </Button>
+            <Button
+              onClick={onLogout}
+              variant="outline"
+              className="flex cursor-pointer items-center justify-between"
+            >
+              Logout
+              <LogOut />
+            </Button>
           </DrawerFooter>
         </DrawerContent>
-        </Drawer>
-    )
+      </Drawer>
+    );
   }
 
   return (
