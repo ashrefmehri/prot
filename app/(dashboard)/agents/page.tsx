@@ -1,4 +1,5 @@
 import { auth } from "@/lib/auth";
+import { AgentsView } from "@/modules/agents/ui/agents-view";
 import { ListHeaders } from "@/modules/agents/ui/list-headers";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
@@ -19,6 +20,7 @@ const AgentsPage = async () => {
     return ( 
         <>
         <ListHeaders/>
+        <AgentsView/>
         </>
      );
 }

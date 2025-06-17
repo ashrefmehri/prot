@@ -14,8 +14,8 @@ export const ListHeaders =()=>{
               <NewAgentDialog open={isOpen} onOpenChange={setIsOpen}/>
                <div className="px-4 py-4 md:px-8 flex flex-col gap-y-4 ">
                 <div className="flex items-center justify-between">
-                  <h5 className="font-medium text-xl tracking-tight">My Agents</h5>
-                  <Button className="tracking-tight" onClick={()=>setIsOpen(true)}>
+                  <h5 className="font-medium text-xl tracking-tighter">My Agents</h5>
+                  <Button className="tracking-tighter" onClick={()=>setIsOpen(true)}>
                     <Plus/>
                     New Agent
                   </Button>
