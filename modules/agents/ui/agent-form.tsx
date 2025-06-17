@@ -93,7 +93,7 @@ export const AgentForm = ({
               <FormLabel className="tracking-tight">Name</FormLabel>
               <FormControl>
                 <Input
-                  className="tracking-tight"
+                  className="tracking-tighter placeholder:text-[15px]"
                   placeholder="Agent Name"
                   {...field}
                 />
@@ -111,7 +111,7 @@ export const AgentForm = ({
               <FormLabel className="tracking-tight">Instruction</FormLabel>
               <FormControl>
                 <Textarea
-                  className="tracking-tight"
+                  className="tracking-tighter placeholder:text-[15px]"
                   placeholder="Instruction here"
                   {...field}
                 />
