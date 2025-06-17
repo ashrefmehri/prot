@@ -4,6 +4,7 @@ import { TRPCReactProvider } from "@/trpc/client";
 
 
 import "./globals.css";
+import { Toaster } from "@/components/ui/sonner";
 
 const font = Inter({
   variable: "--font-outfit",
@@ -28,6 +29,7 @@ export default function RootLayout({
       <body
         className={`${font.className}  antialiased`}
       >
+        <Toaster/>
         {children}
       </body>
     </html>
