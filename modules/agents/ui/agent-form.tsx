@@ -13,7 +13,6 @@ import { Textarea } from "@/components/ui/textarea";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -47,7 +46,7 @@ export const AgentForm = ({
   const createAgent = useMutation(
     trpc.agents.create.mutationOptions({
       onSuccess: () => {
-        queryClient.invalidateQueries(trpc.agents.getMany.queryOptions());
+        queryClient.invalidateQueries(trpc.agents.getMany.queryOptions({}));
         if (initialValues?.id) {
           queryClient.invalidateQueries(
             trpc.agents.getOne.queryOptions({
