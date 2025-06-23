@@ -1,6 +1,6 @@
 import { ResponsiveDialog } from "@/components/responsive-dialog";
 import { AgentForm } from "./agent-form";
-import { AgentGetOne } from "@/trpc/types";
+import { AgentGetOne } from "@/modules/agents/types";
 
 interface UpdateAgentDialogProps {
   open: boolean;
