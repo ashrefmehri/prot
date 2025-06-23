@@ -1,5 +1,5 @@
 import { useTRPC } from "@/trpc/client";
-import { AgentGetOne } from "@/trpc/types";
+import { AgentGetOne } from "@/modules/agents/types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
@@ -113,7 +113,7 @@ export const AgentForm = ({
               <FormLabel className="tracking-tight">Name</FormLabel>
               <FormControl>
                 <Input
-                  className="tracking-tighter placeholder:text-[15px]"
+                  className="tracking-tighter"
                   placeholder="Agent Name"
                   {...field}
                 />
@@ -131,7 +131,7 @@ export const AgentForm = ({
               <FormLabel className="tracking-tight">Instruction</FormLabel>
               <FormControl>
                 <Textarea
-                  className="tracking-tighter placeholder:text-[15px]"
+                  className="tracking-tighter placeholder:text-[14px]"
                   placeholder="Instruction here"
                   {...field}
                 />
